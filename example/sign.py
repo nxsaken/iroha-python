@@ -23,3 +23,7 @@ transaction.append_signature(key_pair)
 re_encoded_transaction = transaction.encode()
 
 print(f"Signed and encoded transaction:\n{re_encoded_transaction}")
+
+# One can also sign arbitrary bytes:
+signed = key_pair.sign(b"I am a teapot")
+print(f"Signed bytes:\n{bytes(signed).hex()}")

@@ -15,7 +15,7 @@ use std::str::FromStr;
 use color_eyre::eyre;
 use iroha_client::client;
 use iroha_config::client::Configuration;
-use iroha_crypto::{Algorithm, Hash, KeyGenConfiguration};
+use iroha_crypto::{Algorithm, Hash, KeyGenConfiguration, SignatureOf};
 use iroha_crypto::{PrivateKey, PublicKey};
 use iroha_data_model::prelude::*;
 use iroha_version::scale::EncodeVersioned;
@@ -75,6 +75,15 @@ impl KeyPair {
     #[getter]
     pub fn private(&self) -> ToPy<PrivateKey> {
         ToPy(self.private_key().clone())
+    }
+
+    /// Sign arbitrary `bytes`
+    /// `bytes` should not be prehashed
+    pub fn sign(&self, bytes: Vec<u8>) -> PyResult<Vec<u8>> {
+        SignatureOf::new(self.deref().clone(), &bytes)
+            .map_err(to_py_err)
+            .map(|sig| sig.payload().to_owned())
+            .map(Into::into)
     }
 }
 
