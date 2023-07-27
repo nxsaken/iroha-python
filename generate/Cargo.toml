@@ -9,9 +9,9 @@ license-file = "../../LICENSE"
 typing = []
 
 [dependencies]
-iroha_schema = { git = "https://github.com/hyperledger/iroha", branch = "iroha2-dev" }
-iroha_schema_gen = { git = "https://github.com/hyperledger/iroha", branch = "iroha2-dev" }
-iroha_data_model  = { git = "https://github.com/hyperledger/iroha", branch = "iroha2-dev" }
+iroha_schema = { git = "https://github.com/hyperledger/iroha", branch = "iroha2-lts" }
+iroha_schema_gen = { git = "https://github.com/hyperledger/iroha", branch = "iroha2-lts" }
+iroha_data_model  = { git = "https://github.com/hyperledger/iroha", branch = "iroha2-lts" }
 
 color-eyre = "0.6.2"
 serde_json = "1"

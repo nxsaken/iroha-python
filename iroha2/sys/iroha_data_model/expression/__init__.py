@@ -12,7 +12,7 @@ ContainsAll = make_struct("ContainsAll", [("collection", "iroha_data_model.expre
 
 ContainsAny = make_struct("ContainsAny", [("collection", "iroha_data_model.expression.EvaluatesTo"), ("elements", "iroha_data_model.expression.EvaluatesTo")])
 
-ContextValue = make_struct("ContextValue", [("value_name", "iroha_data_model.name.Name")])
+ContextValue = make_struct("ContextValue", [("value_name", str)])
 
 Divide = make_struct("Divide", [("left", "iroha_data_model.expression.EvaluatesTo"), ("right", "iroha_data_model.expression.EvaluatesTo")])
 

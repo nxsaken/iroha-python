@@ -24,8 +24,4 @@ FindAssetsByDomainIdAndAssetDefinitionId = make_struct("FindAssetsByDomainIdAndA
 
 FindAssetsByName = make_struct("FindAssetsByName", [("name", "iroha_data_model.expression.EvaluatesTo")])
 
-FindTotalAssetQuantityByAssetDefinitionId = make_struct("FindTotalAssetQuantityByAssetDefinitionId", [("id", "iroha_data_model.expression.EvaluatesTo")])
-
-IsAssetDefinitionOwner = make_struct("IsAssetDefinitionOwner", [("asset_definition_id", "iroha_data_model.expression.EvaluatesTo"), ("account_id", "iroha_data_model.expression.EvaluatesTo")])
-
 SelfResolvingTypeVar.resolve_all()
