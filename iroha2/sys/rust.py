@@ -85,6 +85,10 @@ def query(*path):
 
 
 def to_rust(obj):
+
+    if hasattr(obj, "to_rust"):
+        return obj.to_rust()
+
     if isinstance(obj, list):
         return [to_rust(i) for i in obj]
 
@@ -96,9 +100,6 @@ def to_rust(obj):
 
     if isinstance(obj, dict):
         return {k: to_rust(v) for k, v in obj.items()}
-
-    if hasattr(obj, "to_rust"):
-        return obj.to_rust()
 
     return obj
 

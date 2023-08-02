@@ -3,10 +3,11 @@ import json
 
 from iroha2 import Client
 
-from iroha2.data_model.isi import Register
+from iroha2.data_model.isi import Register, Mint
 from iroha2.data_model.domain import Domain
 from iroha2.data_model.account import Account
-from iroha2.data_model import asset, account
+from iroha2.data_model import asset, account, expression, Value, Identifiable, Id
+from iroha2.data_model.expression import Expression
 from iroha2.data_model.events import FilterBox, pipeline, Event
 from iroha2.crypto import KeyPair
 from iroha2.data_model.query.asset import FindAssetById
@@ -36,9 +37,6 @@ def wait_for_tx(cl: Client, hash: str):
 cfg = json.loads(open("./config.json").read())
 cl = Client(cfg)
 
-keypair = KeyPair()
-print(keypair)
-
 domain = Domain("python")
 register = Register.identifiable(domain)
 hash = cl.submit_isi(register)
@@ -59,5 +57,12 @@ register = Register.identifiable(acct)
 hash = cl.submit_isi(register)
 wait_for_tx(cl, hash)
 
+condition = account.SignatureCheckCondition(Expression.Equal(expression.Equal(Value.U32(1), Value.U32(1))))
+account_id = Expression(Value(Id(account.Id("monty", "python"))))
+mint = Mint(condition, account_id)
+hash = cl.submit_isi(mint)
+wait_for_tx(cl, hash)
+
 query = FindAssetById.id(asset.Id("rose#wonderland", "alice@wonderland"))
 print(cl.query(query))
+

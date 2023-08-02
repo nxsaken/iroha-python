@@ -4,11 +4,19 @@ from ...sys.iroha_data_model.account import (
     Account as _Account,
     NewAccount as _NewAccount,
     Id as _Id,
+    SignatureCheckCondition as _SignatureCheckCondition
 )
 from ..domain import Id as DomainId
 from ..isi import Registrable
 from ...crypto import PublicKey
 from .. import wrapper, patch
+
+@wrapper(_SignatureCheckCondition)
+class SignatureCheckCondition(_SignatureCheckCondition):
+
+    @patch(_SignatureCheckCondition, "to_rust")
+    def to_rust(self):
+        return self[0].to_rust()
 
 
 @wrapper(_Id)
